@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h2>Index</h2>
+
+  {{ section.content | safe }}
+
+  {% set section = get_section(path="_index.md", metadata_only=true) %}
+
+  <div class="nav-link">
+
+      {{ section.permalink }}
+      {{ section.extra.icon }}
+      {{ section.title }}
+
+  </div>
+
+
+  <h2>Subsections</h2>
+
+  <ul>
+
+  {% for section_name in section.subsections %}
+
+    {% set subsection = get_section(path=section_name, metadata_only=true) %}
+
+    {{ subsection |  json_encode() }}
+ 
+    <li>
+
+      <dl>
+
+        <dt>Title</dt>
+        <dd>{{ subsection.title }}</dd>
+
+        <dt>Permalink</dt>
+        <dd>{{ subsection.permalink }}</dd>
+
+        <dt>Extra icon</dt>
+        <dd>{{ subsection.extra.icon }}</dd>
+
+      </dl>
+     
+    </li>
+ 
+  {% endfor %}
+
+  </ul>
+
+{% endblock %}
