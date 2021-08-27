@@ -10,9 +10,18 @@
 
   <div class="nav-link">
 
-      {{ section.permalink }}
-      {{ section.extra.icon }}
-      {{ section.title }}
+      <dl>
+
+        <dt>Title</dt>
+        <dd>{{ section.title }}</dd>
+
+        <dt>Permalink</dt>
+        <dd>{{ section.permalink }}</dd>
+
+        <dt>Extra icon</dt>
+        <dd>{{ section.extra.icon }}</dd>
+
+      </dl>
 
   </div>
 
@@ -23,22 +32,26 @@
 
   {% for section_name in section.subsections %}
 
-    {% set subsection = get_section(path=section_name, metadata_only=true) %}
+    {% set section = get_section(path=section_name, metadata_only=true) %}
 
-    {{ subsection |  json_encode() }}
+    <pre>
+
+      {{ section | json_encode() }}
  
+    </pre>
+
     <li>
 
       <dl>
 
         <dt>Title</dt>
-        <dd>{{ subsection.title }}</dd>
+        <dd>{{ section.title }}</dd>
 
         <dt>Permalink</dt>
-        <dd>{{ subsection.permalink }}</dd>
+        <dd>{{ section.permalink }}</dd>
 
         <dt>Extra icon</dt>
-        <dd>{{ subsection.extra.icon }}</dd>
+        <dd>{{ section.extra.icon }}</dd>
 
       </dl>
      
